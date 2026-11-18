@@ -1,0 +1,9 @@
+---
+import ProductCatalog from '../../components/ProductCatalog.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  return (await getCollection('categories')).map(category => ({ params: { slug: category.id } }));
+}
+---
+<ProductCatalog category={Astro.params.slug} />

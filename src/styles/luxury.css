@@ -1,0 +1,47 @@
+/* A quieter, editorial direction for the boutique. */
+:root{color:#283d4b;background:#f7f3f0}
+.announcement{background:#253e50;color:#e9e6e1;letter-spacing:.16em}
+.announcement span{color:#c99fa6}
+.header{height:100px}
+.brand{color:#283f50;font-size:29px;letter-spacing:.01em}
+.brand-flower{color:#6997aa;font-size:25px}
+.brand-dot{color:#be8f98}
+.header nav{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#54636b}
+.header-link{border-color:#b98c95;color:#344c59;letter-spacing:.08em;text-transform:uppercase}
+.hero{min-height:600px;background:#ebe1df;border-radius:0}
+.hero-copy{padding-left:12%}
+.eyebrow{color:#728995;letter-spacing:.2em}
+.eyebrow span{color:#bb8e97}
+.hero h1{color:#263f50;font-size:clamp(58px,6vw,88px);line-height:1.06}
+.hero h1 em,.section-heading em,.about em{color:#ad7e87}
+.hero-copy>p{color:#716f70;max-width:355px}
+.hero-actions>span{color:#95777b}
+.button{background:#294758;border-radius:0;padding:18px 23px;letter-spacing:.04em}
+.button:hover{background:#426c7e}
+.hero-art{background:radial-gradient(ellipse at 60% 44%,#d2e0df 0,transparent 48%),linear-gradient(135deg,#e2d3d1,#a8c1c8);filter:saturate(.65)}
+.art-center{width:250px;height:330px;border-radius:48% 48% 45% 45%;background:linear-gradient(155deg,#f4edeb,#dfc4c6);border:1px solid rgba(255,255,255,.55);box-shadow:0 25px 70px #314c5540;color:#70858a;transform:translate(-50%,-50%) rotate(-7deg)}
+.art-center strong{font-size:65px;color:#997078}
+.art-flower{opacity:.35;color:#567e8c;text-shadow:none;font-size:100px}
+.flower-two{color:#a0767f;font-size:80px;text-shadow:none}
+.art-sparkle{color:#f8f0e8;opacity:.7}
+.art-note{color:#637c84;font-size:17px}
+.art-orbit{border-color:rgba(255,255,255,.42)}
+.scroll-cue{color:#718487}
+.ticker{background:#e5edec;color:#6e8b93;letter-spacing:.2em}
+.ticker span:nth-of-type(even){color:#ad858a}
+.collections{padding-top:110px}
+.section-heading h2,.about h2{color:#2c4552;line-height:1.08}
+.section-heading>p{color:#818282}
+.section-heading>p span,.card-fa{color:#aa8186}
+.card-image{border-radius:0;background:#e8e3df}
+.card-image img{filter:saturate(.65) contrast(.95)}
+.card-image::after{background:linear-gradient(145deg,rgba(70,107,120,.13),transparent 60%,rgba(161,113,120,.13))}
+.card-arrow{border-radius:0;background:#f8f5f1;color:#466778}
+.card-kicker{color:#929e9e}
+.card-info h3{color:#344e5a}
+.about{border-radius:0;background:#e1ebea}
+.about-flower{color:#819fa4;text-shadow:none;opacity:.65}
+.about-heart{color:#b68b90}
+.about p{color:#728386}
+.footer> a:last-child{color:#6c858b}
+@media(max-width:800px){.header{height:76px}.hero{min-height:auto}.hero-copy{padding:58px 25px 42px}.hero-art{min-height:350px}.art-center{width:165px;height:225px}.art-center strong{font-size:50px}.art-flower{font-size:75px}.collections{padding-top:75px}}

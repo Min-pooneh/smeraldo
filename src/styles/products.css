@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito+Sans:wght@400;600;700&display=swap');
+:root{font-family:'Nunito Sans',sans-serif;color:#171717;background:#faefed}*{box-sizing:border-box}body{margin:0;background:#faefed}a{color:inherit;text-decoration:none}a:focus-visible{outline:3px solid #d94c76;outline-offset:4px}.shop-wrap{width:min(1400px,88%);margin-inline:auto}.shop-hero{height:380px;position:relative;overflow:hidden;background:#f9e9e8}.shop-hero-art{position:absolute;inset:0 0 0 36%;overflow:hidden}.shop-hero-art img{width:100%;height:100%;object-fit:cover;object-position:center 55%;display:block}.shop-hero-art:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#f9e9e8 0%,#f9e9e8e8 20%,transparent 55%)}.shop-header{height:78px;display:flex;align-items:center;position:relative;border-bottom:1px solid #ffffff50}.shop-brand{display:inline-flex;align-items:center;gap:10px;color:#df3b6c;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:34px;letter-spacing:-1px;line-height:1}.shop-brand svg{width:34px;height:32px}.shop-heading{position:relative;padding-top:52px;animation:appear .7s ease-out both}.shop-breadcrumb{display:flex;align-items:center;gap:12px;font-size:18px;font-weight:600}.shop-breadcrumb a:hover{color:#d24470}.shop-breadcrumb span[aria-hidden]{font-size:23px;color:#9b5360}.shop-heading h1{font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:-.035em;line-height:1;font-size:clamp(55px,5vw,76px);margin:28px 0 15px}.shop-heading p{font-size:22px;margin:0}.shop-main{padding:105px 0 80px}.shop-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}.shop-card{min-width:0;overflow:hidden;border-radius:25px;background:#fbf1ef;box-shadow:0 5px 12px #b8797624;transition:transform .25s ease,box-shadow .25s ease;animation:appear .65s ease-out both}.shop-card:nth-child(2){animation-delay:.06s}.shop-card:nth-child(3){animation-delay:.12s}.shop-card:nth-child(4){animation-delay:.18s}.shop-photo{height:320px;overflow:hidden;border-radius:25px;background:#f8e8e6;display:grid;place-items:center}.shop-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}.shop-no-image{color:#ab8b8c;font-size:15px}.shop-card-details{padding:23px 28px 25px}.shop-card h2{font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:700;line-height:1.2;letter-spacing:-.02em;margin:0 0 17px}.shop-price{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:0;font-size:21px;font-weight:700}.shop-price del{font-size:16px;color:#a78e90;font-weight:400}.product-description{font-size:15px;color:#776665;line-height:1.6}.product-description:empty{display:none}.product-description p{margin:12px 0 0}.shop-swatches{display:flex;gap:8px;margin-top:15px}.shop-swatches span{width:19px;height:19px;border-radius:50%;background:var(--swatch);border:1px solid #c6ada6;box-shadow:inset 1px 1px 3px #fff9}.shop-empty{text-align:center;font-size:22px;padding:30px 10px}.shop-card:hover{transform:translateY(-4px);box-shadow:0 12px 24px #b879762c}@media(hover:hover){.shop-card:hover .shop-photo img{transform:scale(1.04)}}@keyframes appear{from{opacity:0;translate:0 10px}to{opacity:1;translate:0 0}}
+@media(max-width:1000px){.shop-wrap{width:92%}.shop-main{padding-top:65px}.shop-grid{gap:15px}.shop-photo{height:240px}.shop-card-details{padding:20px}.shop-card h2{font-size:22px}}
+@media(max-width:700px){.shop-hero{height:340px}.shop-hero-art{left:18%}.shop-hero-art:after{background:linear-gradient(90deg,#f9e9e8 0%,#f9e9e8eb 38%,#f9e9e850 75%,transparent)}.shop-header{height:70px}.shop-brand{font-size:29px}.shop-brand svg{width:30px}.shop-heading{padding-top:38px}.shop-breadcrumb{font-size:16px}.shop-heading h1{font-size:55px;margin:26px 0 12px}.shop-heading p{font-size:17px;max-width:260px;line-height:1.5}.shop-main{padding:35px 0 55px}.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.shop-photo{height:230px}.shop-card{border-radius:19px}.shop-photo{border-radius:19px}.shop-card-details{padding:16px}.shop-card h2{font-size:21px;margin-bottom:12px}.shop-price{font-size:18px}}
+@media(max-width:400px){.shop-photo{height:175px}.shop-card-details{padding:13px}.shop-card h2{font-size:19px}.shop-price{font-size:16px}.shop-heading h1{font-size:48px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+.shop-hero-art.has-banner{inset:0}
+.shop-hero-art.has-banner:after{display:none}
+.shop-hero-art.has-banner img{object-position:center}
+@media(max-width:700px){.shop-hero-art.has-banner img{object-position:65% center}.shop-hero-art.has-banner:after{display:block;background:linear-gradient(90deg,#f9e9e8e8 0%,#f9e9e89c 42%,transparent 75%)}}
+.shop-hero:has(.has-banner){height:auto;min-height:380px;aspect-ratio:2000/689}
+.shop-hero-art.has-banner img{object-fit:contain;object-position:center}
+@media(max-width:900px){
+  .shop-hero:has(.has-banner){height:460px;min-height:0;aspect-ratio:auto}
+  .shop-hero-art.has-banner{inset:auto 0 0;height:auto;aspect-ratio:2000/689}
+  .shop-hero-art.has-banner img{object-fit:contain;object-position:center bottom}
+  .shop-hero-art.has-banner:after{display:none}
+}
+.shop-header{border-bottom:0}
+.shop-photo img[hidden]{display:none}
+.shop-swatches button{width:19px;height:19px;padding:0;border-radius:50%;background:var(--swatch);border:1px solid #c6ada6;box-shadow:inset 1px 1px 3px #fff9;cursor:pointer}
+.shop-swatches button[aria-pressed=true]{outline:2px solid #c75c7c;outline-offset:3px}
+.shop-swatches button:focus-visible{outline:2px solid #a63d61;outline-offset:3px}
+.product-brand{font-size:15px;color:#806e6d;margin:-7px 0 12px}
+.drohoo-lipstick .shop-photo{display:block;height:auto;aspect-ratio:1}
+.drohoo-lipstick .shop-photo img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
+.drohoo-lipstick .shop-photo img[data-color-image="2"]{object-position:center 35%}
+.drohoo-lipstick .shop-photo img[data-color-image="0"]{object-position:center 45%}
+.drohoo-lipstick .shop-photo img[data-color-image="3"],
+.drohoo-lipstick .shop-photo img[data-color-image="4"],
+.drohoo-lipstick .shop-photo img[data-color-image="5"]{object-position:center 45%}
+.drohoo-gloss .shop-photo{display:block;height:auto;aspect-ratio:1}
+.drohoo-gloss .shop-photo img{width:100%;height:100%;object-fit:cover;object-position:center 32%}
+.drohoo-gloss .shop-photo img[data-color-image="0"]{object-position:center 29%}
+.drohoo-balm .shop-photo{display:block;height:auto;aspect-ratio:1}
+.drohoo-balm .shop-photo img{width:100%;height:100%;object-fit:cover;object-position:center 48%}
+.eyeshadow-palette .shop-photo{position:relative;display:block;height:auto;aspect-ratio:1}
+.eyeshadow-palette .shop-photo img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.eyeshadow-palette .shop-photo img[data-gallery-image="0"]{object-position:center 45%}
+.gallery-controls{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;padding:7px 10px;border-radius:20px;background:#fff9;backdrop-filter:blur(5px)}
+.gallery-controls button{width:10px;height:10px;border:0;border-radius:50%;background:#bb9b9f;cursor:pointer;padding:0}
+.gallery-controls button[aria-pressed=true]{background:#d9436c}
+.gallery-controls button:focus-visible{outline:2px solid #a63d61;outline-offset:3px}
+.doll-product .shop-photo{display:block;height:auto;aspect-ratio:1}
+.doll-product .shop-photo img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.watch-product .shop-photo{position:relative;display:block;height:auto;aspect-ratio:1}
+.watch-product .shop-photo img{width:100%;height:100%;object-fit:cover;object-position:center}
+.gallery-controls[hidden]{display:none}
+.star-bracelet .shop-photo{position:relative;display:block;height:auto;aspect-ratio:1}
+.star-bracelet .shop-photo img{width:100%;height:100%;object-fit:cover;object-position:center}
+@font-face{font-family:Tiam;src:url('../assets/tiam.woff2') format('woff2');font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+FB50-FDFF,U+FE70-FEFF}
+body{font-family:Tiam,'Nunito Sans',sans-serif}
+.shop-brand,.shop-heading h1,.shop-card h2{font-family:Tiam,'Cormorant Garamond',serif}
+.shop-card h2{font-size:28px}
+.product-brand,.product-description,.shop-no-image{font-size:19px}
+.shop-price{font-size:23px}
+@media(max-width:700px){.shop-card h2{font-size:23px}.product-brand,.product-description,.shop-no-image{font-size:17px}.shop-price{font-size:20px}}
+.shop-card-details{overflow-wrap:anywhere}
+.shop-card h2[lang="fa"]{font-size:56px}
+.product-brand[lang="fa"],.product-description[lang="fa"]{font-size:38px}
+.product-brand span[lang="fa"]{font-size:38px}
+.shop-price span[lang="fa"]{font-size:46px}
+.shop-price del[lang="fa"]{font-size:32px}
+@media(max-width:700px){.shop-card h2[lang="fa"]{font-size:46px}.product-brand[lang="fa"],.product-description[lang="fa"],.product-brand span[lang="fa"]{font-size:34px}.shop-price span[lang="fa"]{font-size:40px}}
+.shop-card h2[lang="fa"],.product-brand[lang="fa"],.product-brand span[lang="fa"],.product-description[lang="fa"],.shop-price span[lang="fa"],.shop-price del[lang="fa"]{font-weight:400}
+.shop-card h2{margin-bottom:3px;line-height:1}
+.product-brand{margin:0 0 3px;line-height:1;display:flex;align-items:baseline;justify-content:flex-start;gap:3px}
+.brand-colon{font-family:'Nunito Sans',sans-serif;font-size:19px;line-height:1}
+.shop-price{line-height:1;margin:0}
+.shop-price span{line-height:1}
+.shop-swatches{margin-top:10px}
+.shop-price .price-separator{font-family:'Nunito Sans',sans-serif;font-size:.5em;vertical-align:baseline;font-weight:400}
+.shop-photo.square-product{display:block;height:auto;aspect-ratio:1}
+.shop-main{padding-top:35px}
+@media(max-width:700px){.shop-main{padding-top:24px}}
+@keyframes product-image-in{from{opacity:0;translate:10px 0;scale:1.025}to{opacity:1;translate:0 0;scale:1}}
+.shop-photo img[data-color-image]:not([hidden]),.shop-photo img[data-gallery-image]:not([hidden]){animation:product-image-in .65s cubic-bezier(.2,.7,.2,1)}
+.shop-swatches button,.gallery-controls button{transition:transform .2s ease,background-color .2s ease,box-shadow .2s ease}
+.shop-brand svg{transition:transform .3s ease}
+@media(hover:hover){
+  .shop-swatches button:hover,.gallery-controls button:hover{transform:scale(1.2)}
+  .shop-brand:hover svg{transform:rotate(-8deg)}
+}

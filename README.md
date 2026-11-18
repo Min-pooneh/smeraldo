@@ -60,4 +60,3 @@ order: 2
 Use `order` to set the display order. The category marked `featured: true` appears in the wide section on the homepage; use this for only one category. Add a new category by creating another file and using its filename (without `.mdx`) in the relevant products. Rebuild after changes.
 
 Homepage and category artwork is stored in `src/assets/`, with text rendered separately. Social icons are decorative until actual account URLs are provided. No checkout or admin panel is configured.
-# smeraldo

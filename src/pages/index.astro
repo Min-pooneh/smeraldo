@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets';
+import { Instagram, Send, BadgeCheck, Gem, Droplet, Heart, Sparkles } from 'lucide-astro';
+import { getCollection } from 'astro:content';
+import hero from '../assets/home-hero.png';
+import Bow from '../components/Bow.astro';
+import '../styles/home.css';
+
+const categories = (await getCollection('categories')).sort((a, b) => a.data.order - b.data.order);
+const icons = { cosmetics: Sparkles, accessories: Gem, 'hair-accessories': Bow, 'skin-care': Droplet, 'girly-stuff': Heart };
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Smeraldo: a little world of beauty, accessories and lovely things." />
+    <title>Smeraldo | Beauty begins here</title>
+  </head>
+  <body>
+    <header class="home-hero">
+      <div class="hero-image"><Image src={hero} alt="" loading="eager" fetchpriority="high" /></div>
+      <div class="hero-inner">
+        <a class="brand" href="/" aria-label="Smeraldo home"><Bow strokeWidth={1.6} /> <span>Smeraldo</span></a>
+        <div class="hero-copy"><h1><span>Beauty</span><br />begins here.</h1><p>Premium beauty &amp; accessories</p></div>
+      </div>
+    </header>
+    <main class="home-main">
+      <section aria-labelledby="categories-heading">
+        <div class="home-section-heading"><h2 id="categories-heading">Explore Categories</h2></div>
+        <div class="home-category-grid">
+          {categories.map(category => {
+            const Icon = icons[category.id as keyof typeof icons] ?? Sparkles;
+            return <a class="home-category" href={`/category/${category.id}/`} aria-label={`Explore ${category.data.name}`}>
+              <div class="category-photo"><Image src={category.data.image} alt="" /></div>
+              <div class="category-name"><Icon size={25} strokeWidth={1.4} /><span class="category-titles"><span>{category.data.name}</span><span class="category-fa" lang="fa" dir="rtl">{category.data.nameFa}</span></span></div>
+            </a>;
+          })}
+        </div>
+      </section>
+      <section class="about-bar" aria-labelledby="about-heading">
+        <h2 id="about-heading">About Smeraldo</h2>
+        <p lang="fa" dir="rtl">ثبت سفارش از طریق بله، تلگرام و اینستاگرام</p>
+        <div class="social" aria-label="Social channels"><Instagram size={23} aria-label="Instagram" /><Send size={23} aria-label="Telegram" /><BadgeCheck size={23} aria-label="Bale" /></div>
+      </section>
+    </main>
+  </body>
+</html>

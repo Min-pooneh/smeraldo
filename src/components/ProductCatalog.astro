@@ -1,0 +1,103 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection, render } from 'astro:content';
+import Bow from './Bow.astro';
+import hero from '../assets/gloss-new.png';
+import '../styles/products.css';
+
+interface Props { category?: string }
+const { category = 'all' } = Astro.props;
+const currentCategory = (await getCollection('categories')).find(item => item.id === category);
+const products = (await getCollection('products')).filter(product => !product.data.draft && (category === 'all' || product.data.category === category));
+if (category === 'accessories') {
+  const groups = ['watch', 'bracelet', 'necklace', 'earrings'];
+  const rank = (id: string) => {
+    const index = groups.findIndex(group => id.includes(group));
+    return index === -1 ? groups.length : index;
+  };
+  products.sort((a, b) => rank(a.id) - rank(b.id));
+}
+const renderedProducts = await Promise.all(products.map(async product => ({ product, Content: (await render(product)).Content })));
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Discover Smeraldo’s dreamy collection of accessories, beauty and little lovely things." />
+    <title>{currentCategory?.data.name ?? 'Our Products'} | Smeraldo</title>
+  </head>
+  <body class="shop-page">
+    <section class="shop-hero">
+      <div class:list={['shop-hero-art', { 'has-banner': currentCategory?.data.banner }]} aria-hidden="true"><Image src={currentCategory?.data.banner ?? currentCategory?.data.image ?? hero} alt="" loading="eager" /></div>
+      <header class="shop-header shop-wrap">
+        <a class="shop-brand" href="/" aria-label="Smeraldo home"><Bow strokeWidth={1.5} /> Smeraldo</a>
+      </header>
+      <div class="shop-heading shop-wrap">
+        <nav class="shop-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">›</span><span aria-current="page">{currentCategory?.data.name ?? 'Products'}</span></nav>
+        <h1>{currentCategory?.data.name ?? 'Our Products'}</h1>
+        <p>Discover our premium {currentCategory ? `${currentCategory.data.name.toLowerCase()} collection` : 'beauty & accessories'}.</p>
+      </div>
+    </section>
+    <main class="shop-wrap shop-main">
+      <div class="shop-grid">
+        {renderedProducts.map(({ product, Content }, index) => {
+          const firstColorWithImage = product.data.colors?.findIndex(color => color.image) ?? -1;
+          const initialColor = product.data.image ? -1 : firstColorWithImage;
+          return <article class:list={['shop-card', { 'drohoo-lipstick': product.id === 'drohoo-liquid-lipstick', 'drohoo-gloss': product.id === 'drohoo-lip-gloss', 'drohoo-balm': product.id === 'drohoo-thermal-lip-balm', 'eyeshadow-palette': product.id === 'eyeshadow-palette', 'doll-product': product.id === 'doll-20cm', 'watch-product': product.id === 'walar-watch', 'star-bracelet': product.id === 'star-bracelet' || product.id === 'leaf-bracelet' || product.id.startsWith('earrings-') || product.id === 'blood-orange-toner' || product.id === 'bioaqua-micellar' || product.id === 'portable-wipes' || product.id === 'brown-lip-tint' || product.id === 'eyeshadow-9' || product.id === 'eyeshadow-35' || product.id === 'face-gems' || product.id === 'sheet-mask' || product.id === 'hot-water-bottle' || product.id.endsWith('-kanzashi') || product.id === 'chili-hair-clip' || product.id.endsWith('-necklace') }]}>
+          <div class:list={['shop-photo', { 'square-product': product.id === 'lechic-brown-eyeliner' || product.id === 'kuromi-hair-ties' }]}>
+            {product.data.image && <Image src={product.data.image} alt={product.data.title} loading={index < 2 ? 'eager' : 'lazy'} data-default-image />}
+            {product.data.colors?.map((color, colorIndex) => color.image && <Image src={color.image} alt={`${product.data.title} - ${color.name}`} loading={initialColor === colorIndex && index < 2 ? 'eager' : 'lazy'} data-color-image={colorIndex} hidden={initialColor !== colorIndex} />)}
+            {product.data.colors?.map((color, colorIndex) => color.modelImage && <Image src={color.modelImage} alt={`${product.data.title} ${color.name} روی دست`} loading="lazy" data-color-image={colorIndex} data-model-image hidden />)}
+            {product.data.gallery?.map((photo, photoIndex) => <Image src={photo.image} alt={`${product.data.title} - ${photo.label}`} loading={photoIndex === 0 && index < 2 ? 'eager' : 'lazy'} data-gallery-image={photoIndex} hidden={photoIndex !== 0} />)}
+            {!product.data.image && firstColorWithImage === -1 && !product.data.gallery?.length && <span class="shop-no-image">Image coming soon</span>}
+            {product.data.gallery && product.data.gallery.length > 1 && <div class="gallery-controls" role="group" aria-label={`تصاویر ${product.data.title}`}>
+              {product.data.gallery.map((photo, photoIndex) => <button type="button" data-gallery-select={photoIndex} aria-label={photo.label} aria-pressed={photoIndex === 0} title={photo.label}></button>)}
+            </div>}
+            {product.data.colors?.map((color, colorIndex) => color.modelImage && <div class="gallery-controls color-gallery" role="group" aria-label={`تصاویر ${color.name}`} data-color-gallery={colorIndex} hidden={initialColor !== colorIndex}>
+              <button type="button" data-color-view="product" aria-label="عکس محصول" aria-pressed="true" title="عکس محصول"></button>
+              <button type="button" data-color-view="model" aria-label="عکس روی دست" aria-pressed="false" title="عکس روی دست"></button>
+            </div>)}
+          </div>
+          <div class="shop-card-details">
+            <h2 dir="auto" lang={/[\u0600-\u06ff]/.test(product.data.title) ? 'fa' : 'en'}>{product.data.title}</h2>
+            {product.data.brand && <p class="product-brand" dir="rtl"><span lang="fa">برند</span><span class="brand-colon" lang="en">:</span> <bdi>{product.data.brand}</bdi></p>}
+            {product.data.code && <p class="product-brand" dir="rtl" lang="fa">کد: {product.data.code}</p>}
+            {product.data.price && <p class="shop-price" dir="auto"><span lang={/[\u0600-\u06ff]/.test(product.data.price) ? 'fa' : 'en'}>{product.data.price.split(/([٬،,])/).map(part => /^[٬،,]$/.test(part) ? <span class="price-separator" lang="en">,</span> : part)}</span>{product.data.originalPrice && <del lang={/[\u0600-\u06ff]/.test(product.data.originalPrice) ? 'fa' : 'en'}>{product.data.originalPrice.split(/([٬،,])/).map(part => /^[٬،,]$/.test(part) ? <span class="price-separator" lang="en">,</span> : part)}</del>}</p>}
+            <div class="product-description" dir="auto" lang="fa"><Content /></div>
+            {product.data.colors && <div class="shop-swatches" role="group" aria-label={`Colors for ${product.data.title}`}>{product.data.colors.map((color, colorIndex) => color.image ? <button type="button" style={`--swatch: ${color.hex}`} title={color.name} aria-label={color.name} aria-pressed={initialColor === colorIndex} data-select-color={colorIndex}></button> : <span style={`--swatch: ${color.hex}`} title={color.name} aria-label={color.name}></span>)}</div>}
+          </div>
+        </article>})}
+      </div>
+      {products.length === 0 && <p class="shop-empty">No lovely things found here just yet. ♡</p>}
+    </main>
+    <script>
+      document.querySelectorAll<HTMLElement>('.shop-card').forEach(card => {
+        const buttons = card.querySelectorAll<HTMLButtonElement>('[data-select-color]');
+        const photos = card.querySelectorAll<HTMLImageElement>('.shop-photo img');
+        buttons.forEach(button => button.addEventListener('click', () => {
+          buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+          photos.forEach(photo => { photo.hidden = photo.dataset.colorImage !== button.dataset.selectColor || photo.hasAttribute('data-model-image'); });
+          card.querySelectorAll<HTMLElement>('[data-color-gallery]').forEach(gallery => {
+            gallery.hidden = gallery.dataset.colorGallery !== button.dataset.selectColor;
+            gallery.querySelectorAll<HTMLButtonElement>('[data-color-view]').forEach(view => view.setAttribute('aria-pressed', String(view.dataset.colorView === 'product')));
+          });
+        }));
+        card.querySelectorAll<HTMLElement>('[data-color-gallery]').forEach(gallery => {
+          gallery.querySelectorAll<HTMLButtonElement>('[data-color-view]').forEach(button => button.addEventListener('click', () => {
+            gallery.querySelectorAll<HTMLButtonElement>('[data-color-view]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+            card.querySelectorAll<HTMLImageElement>('[data-color-image]').forEach(photo => {
+              photo.hidden = photo.dataset.colorImage !== gallery.dataset.colorGallery || photo.hasAttribute('data-model-image') !== (button.dataset.colorView === 'model');
+            });
+          }));
+        });
+        const galleryButtons = card.querySelectorAll<HTMLButtonElement>('[data-gallery-select]');
+        const galleryPhotos = card.querySelectorAll<HTMLImageElement>('[data-gallery-image]');
+        galleryButtons.forEach(button => button.addEventListener('click', () => {
+          galleryButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+          galleryPhotos.forEach(photo => { photo.hidden = photo.dataset.galleryImage !== button.dataset.gallerySelect; });
+        }));
+      });
+    </script>
+  </body>
+</html>
