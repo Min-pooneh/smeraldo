@@ -18,6 +18,28 @@ if (category === 'accessories') {
   };
   products.sort((a, b) => rank(a.id) - rank(b.id));
 }
+if (category === 'hair-accessories') {
+  products.sort((a, b) => a.data.title.localeCompare(b.data.title, 'fa'));
+}
+if (category === 'skin-care') {
+  const adjacentProducts = ['blood-orange-toner', 'bioaqua-micellar'];
+  const rank = (id: string) => adjacentProducts.includes(id) ? 0 : 1;
+  products.sort((a, b) => rank(a.id) - rank(b.id) || a.data.title.localeCompare(b.data.title, 'fa'));
+}
+if (category === 'girly-stuff') {
+  products.sort((a, b) => a.data.title.localeCompare(b.data.title, 'fa'));
+}
+if (category === 'cosmetics') {
+  const firstProducts = ['drohoo-liquid-lipstick', 'drohoo-lip-gloss', 'drohoo-thermal-lip-balm', 'brown-lip-tint'];
+  const rank = (id: string) => {
+    const index = firstProducts.indexOf(id);
+    if (index !== -1) return index;
+    if (id.startsWith('eyeshadow-')) return firstProducts.length;
+    return firstProducts.length + 1;
+  };
+  const persianOrder = new Intl.Collator('fa', { numeric: true });
+  products.sort((a, b) => rank(a.id) - rank(b.id) || persianOrder.compare(a.data.title, b.data.title));
+}
 const renderedProducts = await Promise.all(products.map(async product => ({ product, Content: (await render(product)).Content })));
 ---
 <!doctype html>
