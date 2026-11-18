@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito+Sans:wght@400;600;700&display=swap');
+@keyframes page-fade-in{from{opacity:0}to{opacity:1}}
+body{animation:page-fade-in .5s ease-out}
 :root{font-family:'Nunito Sans',sans-serif;color:#171717;background:#faefed}*{box-sizing:border-box}body{margin:0;background:#faefed}a{color:inherit;text-decoration:none}a:focus-visible{outline:3px solid #d94c76;outline-offset:4px}.shop-wrap{width:min(1400px,88%);margin-inline:auto}.shop-hero{height:380px;position:relative;overflow:hidden;background:#f9e9e8}.shop-hero-art{position:absolute;inset:0 0 0 36%;overflow:hidden}.shop-hero-art img{width:100%;height:100%;object-fit:cover;object-position:center 55%;display:block}.shop-hero-art:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#f9e9e8 0%,#f9e9e8e8 20%,transparent 55%)}.shop-header{height:78px;display:flex;align-items:center;position:relative;border-bottom:1px solid #ffffff50}.shop-brand{display:inline-flex;align-items:center;gap:10px;color:#df3b6c;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:34px;letter-spacing:-1px;line-height:1}.shop-brand svg{width:34px;height:32px}.shop-heading{position:relative;padding-top:52px;animation:appear .7s ease-out both}.shop-breadcrumb{display:flex;align-items:center;gap:12px;font-size:18px;font-weight:600}.shop-breadcrumb a:hover{color:#d24470}.shop-breadcrumb span[aria-hidden]{font-size:23px;color:#9b5360}.shop-heading h1{font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:-.035em;line-height:1;font-size:clamp(55px,5vw,76px);margin:28px 0 15px}.shop-heading p{font-size:22px;margin:0}.shop-main{padding:105px 0 80px}.shop-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}.shop-card{min-width:0;overflow:hidden;border-radius:25px;background:#fbf1ef;box-shadow:0 5px 12px #b8797624;transition:transform .25s ease,box-shadow .25s ease;animation:appear .65s ease-out both}.shop-card:nth-child(2){animation-delay:.06s}.shop-card:nth-child(3){animation-delay:.12s}.shop-card:nth-child(4){animation-delay:.18s}.shop-photo{height:320px;overflow:hidden;border-radius:25px;background:#f8e8e6;display:grid;place-items:center}.shop-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}.shop-no-image{color:#ab8b8c;font-size:15px}.shop-card-details{padding:23px 28px 25px}.shop-card h2{font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:700;line-height:1.2;letter-spacing:-.02em;margin:0 0 17px}.shop-price{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:0;font-size:21px;font-weight:700}.shop-price del{font-size:16px;color:#a78e90;font-weight:400}.product-description{font-size:15px;color:#776665;line-height:1.6}.product-description:empty{display:none}.product-description p{margin:12px 0 0}.shop-swatches{display:flex;gap:8px;margin-top:15px}.shop-swatches span{width:19px;height:19px;border-radius:50%;background:var(--swatch);border:1px solid #c6ada6;box-shadow:inset 1px 1px 3px #fff9}.shop-empty{text-align:center;font-size:22px;padding:30px 10px}.shop-card:hover{transform:translateY(-4px);box-shadow:0 12px 24px #b879762c}@media(hover:hover){.shop-card:hover .shop-photo img{transform:scale(1.04)}}@keyframes appear{from{opacity:0;translate:0 10px}to{opacity:1;translate:0 0}}
 @media(max-width:1000px){.shop-wrap{width:92%}.shop-main{padding-top:65px}.shop-grid{gap:15px}.shop-photo{height:240px}.shop-card-details{padding:20px}.shop-card h2{font-size:22px}}
 @media(max-width:700px){.shop-hero{height:340px}.shop-hero-art{left:18%}.shop-hero-art:after{background:linear-gradient(90deg,#f9e9e8 0%,#f9e9e8eb 38%,#f9e9e850 75%,transparent)}.shop-header{height:70px}.shop-brand{font-size:29px}.shop-brand svg{width:30px}.shop-heading{padding-top:38px}.shop-breadcrumb{font-size:16px}.shop-heading h1{font-size:55px;margin:26px 0 12px}.shop-heading p{font-size:17px;max-width:260px;line-height:1.5}.shop-main{padding:35px 0 55px}.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.shop-photo{height:230px}.shop-card{border-radius:19px}.shop-photo{border-radius:19px}.shop-card-details{padding:16px}.shop-card h2{font-size:21px;margin-bottom:12px}.shop-price{font-size:18px}}
@@ -11,8 +13,10 @@
 .shop-hero:has(.has-banner){height:auto;min-height:380px;aspect-ratio:2000/689}
 .shop-hero-art.has-banner img{object-fit:contain;object-position:center}
 @media(max-width:900px){
-  .shop-hero:has(.has-banner){height:460px;min-height:0;aspect-ratio:auto}
-  .shop-hero-art.has-banner{inset:auto 0 0;height:auto;aspect-ratio:2000/689}
+  .shop-hero:has(.has-banner){display:flex;flex-direction:column;height:auto;min-height:0;aspect-ratio:auto}
+  .shop-hero:has(.has-banner) .shop-header{order:0}
+  .shop-hero:has(.has-banner) .shop-heading{order:1;padding-bottom:8px}
+  .shop-hero-art.has-banner{position:relative;order:2;inset:auto;width:100%;height:auto;aspect-ratio:2000/689}
   .shop-hero-art.has-banner img{object-fit:contain;object-position:center bottom}
   .shop-hero-art.has-banner:after{display:none}
 }
@@ -71,6 +75,14 @@ body{font-family:Tiam,'Nunito Sans',sans-serif}
 .shop-swatches{margin-top:10px}
 .shop-price .price-separator{font-family:'Nunito Sans',sans-serif;font-size:.5em;vertical-align:baseline;font-weight:400}
 .shop-photo.square-product{display:block;height:auto;aspect-ratio:1}
+.shop-photo.manicure-photo{position:relative;display:block;height:auto;aspect-ratio:1}
+.swatch-row{display:flex;align-items:center;gap:10px;margin-top:10px;min-height:32px}
+.swatch-row .shop-swatches{margin-top:0;flex-wrap:wrap}
+.swatch-test-button{display:grid;place-items:center;flex-shrink:0;width:32px;height:32px;margin:0 0 0 auto;padding:0;border:1px solid #d9436c;border-radius:50%;background:transparent;color:#a63d61;cursor:pointer}
+.swatch-test-button[aria-pressed="true"]{background:#d9436c;color:white}
+.bow-hair-clip .shop-photo{display:block;height:auto;aspect-ratio:1}
+.bow-hair-clip .shop-photo img[data-color-image]{width:100%;height:100%;object-fit:contain;object-position:center}
+.ribbed-headband .shop-photo img[data-color-image]{object-position:center}
 .shop-main{padding-top:35px}
 @media(max-width:700px){.shop-main{padding-top:24px}}
 @keyframes product-image-in{from{opacity:0;translate:10px 0;scale:1.025}to{opacity:1;translate:0 0;scale:1}}

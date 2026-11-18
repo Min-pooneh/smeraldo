@@ -1,13 +1,12 @@
 ---
 import { Image } from 'astro:assets';
-import { Instagram, Send, BadgeCheck, Gem, Droplet, Heart, Sparkles } from 'lucide-astro';
+import { Instagram, Send } from 'lucide-astro';
 import { getCollection } from 'astro:content';
-import hero from '../assets/home-hero.png';
+import hero from '../assets/home-hero.webp';
 import Bow from '../components/Bow.astro';
 import '../styles/home.css';
 
 const categories = (await getCollection('categories')).sort((a, b) => a.data.order - b.data.order);
-const icons = { cosmetics: Sparkles, accessories: Gem, 'hair-accessories': Bow, 'skin-care': Droplet, 'girly-stuff': Heart };
 ---
 <!doctype html>
 <html lang="en">
@@ -30,10 +29,9 @@ const icons = { cosmetics: Sparkles, accessories: Gem, 'hair-accessories': Bow, 
         <div class="home-section-heading"><h2 id="categories-heading">Explore Categories</h2></div>
         <div class="home-category-grid">
           {categories.map(category => {
-            const Icon = icons[category.id as keyof typeof icons] ?? Sparkles;
             return <a class="home-category" href={`/category/${category.id}/`} aria-label={`Explore ${category.data.name}`}>
               <div class="category-photo"><Image src={category.data.image} alt="" /></div>
-              <div class="category-name"><Icon size={25} strokeWidth={1.4} /><span class="category-titles"><span>{category.data.name}</span><span class="category-fa" lang="fa" dir="rtl">{category.data.nameFa}</span></span></div>
+              <div class="category-name"><span class="category-titles"><span>{category.data.name}</span><span class="category-fa" lang="fa" dir="rtl">{category.data.nameFa}</span></span></div>
             </a>;
           })}
         </div>
@@ -41,7 +39,7 @@ const icons = { cosmetics: Sparkles, accessories: Gem, 'hair-accessories': Bow, 
       <section class="about-bar" aria-labelledby="about-heading">
         <h2 id="about-heading">About Smeraldo</h2>
         <p lang="fa" dir="rtl">ثبت سفارش از طریق بله، تلگرام و اینستاگرام</p>
-        <div class="social" aria-label="Social channels"><Instagram size={23} aria-label="Instagram" /><Send size={23} aria-label="Telegram" /><BadgeCheck size={23} aria-label="Bale" /></div>
+        <div class="social" aria-label="Social channels"><a href="https://www.instagram.com/smeraldo._.beauty?obrf=ZjVtdGt2OXZsd3A5" aria-label="Instagram"><Instagram size={23} /></a><a href="https://t.me/smeraldo_beauty" aria-label="Telegram"><Send size={23} /></a><a href="https://ble.ir/smeraldo_beauty" aria-label="Bale"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h5v3.5A8.5 8.5 0 1 1 3 14z"/><path d="m8 13 3 3 5-5"/></svg></a></div>
       </section>
     </main>
   </body>
