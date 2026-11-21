@@ -41,9 +41,10 @@ body{animation:page-fade-in .5s ease-out}
 .eyeshadow-palette .shop-photo{position:relative;display:block;height:auto;aspect-ratio:1}
 .eyeshadow-palette .shop-photo img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
 .eyeshadow-palette .shop-photo img[data-gallery-image="0"]{object-position:center 45%}
-.gallery-controls{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;padding:7px 10px;border-radius:20px;background:#fff9;backdrop-filter:blur(5px)}
-.gallery-controls button{width:10px;height:10px;border:0;border-radius:50%;background:#bb9b9f;cursor:pointer;padding:0}
-.gallery-controls button[aria-pressed=true]{background:#d9436c}
+.shop-photo{position:relative}
+.gallery-controls{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;padding:7px 10px;border-radius:20px;background:#0006;backdrop-filter:blur(5px)}
+.gallery-controls button{width:10px;height:10px;border:0;border-radius:50%;background:#fffa;cursor:pointer;padding:0}
+.gallery-controls button[aria-pressed=true]{background:#fff}
 .gallery-controls button:focus-visible{outline:2px solid #a63d61;outline-offset:3px}
 .doll-product .shop-photo{display:block;height:auto;aspect-ratio:1}
 .doll-product .shop-photo img{width:100%;height:100%;object-fit:cover;object-position:center top}
