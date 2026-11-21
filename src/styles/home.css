@@ -50,3 +50,17 @@ a:focus-visible{outline:3px solid #bd4267;outline-offset:4px}
 @media(max-width:700px){.home-hero{min-height:430px}.hero-image{top:auto;height:auto;aspect-ratio:8/3}.hero-image::after{background:linear-gradient(180deg,#f9e9e8 0%,rgba(249,233,232,.1) 68%,rgba(249,233,232,0) 100%)}.hero-image img{object-fit:contain;object-position:center bottom}.hero-inner{width:90%}.brand{padding-top:18px;font-size:31px}.brand svg{width:31px}.hero-copy{top:22%;left:1%}.hero-copy h1{font-size:clamp(62px,15vw,79px)}.hero-copy p{margin-top:25px;font-size:11px;letter-spacing:.12em}.home-main{padding:35px 0 42px}.home-section-heading{gap:14px;margin-bottom:23px}.home-section-heading h2{font-size:30px;white-space:normal;text-align:center}.home-category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.home-category-grid .home-category:last-child{grid-column:1/-1}.category-photo{height:155px}.home-category-grid .home-category:last-child .category-photo{height:185px}.category-name{min-height:71px;font-size:17px;padding:12px 14px}.category-fa{font-size:14px}.about-bar{flex-wrap:wrap;gap:13px;margin-top:22px;padding:17px}.about-bar h2{font-size:25px}.about-bar p{order:3;flex-basis:100%;padding:12px 0 0;border-top:1px solid #edcdd0;border-right:0;font-size:18px}.social{margin-left:auto}}
 @media(max-width:400px){.home-hero{min-height:390px}.hero-copy{top:22%}.hero-copy h1{font-size:59px}.category-photo{height:125px}.home-category-grid .home-category:last-child .category-photo{height:155px}.category-name{font-size:15px}.category-fa{font-size:13px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* Keep the original, full banner composition on larger screens. */
+@media(min-width:701px){
+  .home-hero{min-height:0;height:auto;aspect-ratio:8/3;background:#fae9e8}
+  .hero-image{inset:0}
+  .hero-image::after{display:none}
+  .hero-image img{object-fit:contain;object-position:center}
+  .hero-inner{width:min(1530px,87%);min-height:0}
+  .brand{padding-top:12px;font-size:34px;letter-spacing:-1px}
+  .brand svg{width:38px;height:34px}
+  .hero-copy{top:25%;left:4%}
+  .hero-copy h1{font-size:clamp(65px,5.3vw,95px);line-height:.78;letter-spacing:-.035em}
+  .hero-copy p{margin-top:30px;font-size:16px}
+}
