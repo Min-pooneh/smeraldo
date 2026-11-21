@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { Instagram, Send } from 'lucide-astro';
+import { ArrowUpRight, Instagram, Send } from 'lucide-astro';
 import { getCollection } from 'astro:content';
 import hero from '../assets/home-hero.webp';
 import Bow from '../components/Bow.astro';
@@ -31,7 +31,7 @@ const categories = (await getCollection('categories')).sort((a, b) => a.data.ord
           {categories.map(category => {
             return <a class="home-category" href={`/category/${category.id}/`} aria-label={`Explore ${category.data.name}`}>
               <div class="category-photo"><Image src={category.data.image} alt="" /></div>
-              <div class="category-name"><span class="category-titles"><span>{category.data.name}</span><span class="category-fa" lang="fa" dir="rtl">{category.data.nameFa}</span></span></div>
+              <div class="category-name"><span class="category-titles"><span>{category.data.name}</span><span class="category-fa" lang="fa" dir="rtl">{category.data.nameFa}</span></span><ArrowUpRight aria-hidden="true" /></div>
             </a>;
           })}
         </div>

@@ -79,6 +79,10 @@ const renderedProducts = await Promise.all(products.map(async product => ({ prod
       </div>
     </section>
     <main class="shop-wrap shop-main">
+      <div class="shop-collection-meta">
+        <p>{products.length} {products.length === 1 ? 'lovely find' : 'lovely finds'} to explore</p>
+        <span aria-hidden="true">✦</span>
+      </div>
       <div class="shop-grid">
         {renderedProducts.map(({ product, Content }, index) => {
           const firstColorWithImage = product.data.colors?.findIndex(color => color.image) ?? -1;
