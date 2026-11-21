@@ -11,12 +11,16 @@ const { category = 'all' } = Astro.props;
 const currentCategory = (await getCollection('categories')).find(item => item.id === category);
 const products = (await getCollection('products')).filter(product => !product.data.draft && (category === 'all' || product.data.category === category));
 if (category === 'accessories') {
-  const groups = ['watch', 'bracelet', 'necklace', 'earrings'];
+  const groups = ['watch', 'bracelet', 'necklace', 'ring', 'earrings'];
   const rank = (id: string) => {
-    const index = groups.findIndex(group => id.includes(group));
+    const index = groups.findIndex(group => group === 'ring' ? id.startsWith('ring-') : id.includes(group));
     return index === -1 ? groups.length : index;
   };
-  products.sort((a, b) => rank(a.id) - rank(b.id));
+  const codeOrder = new Intl.Collator('fa', { numeric: true });
+  products.sort((a, b) => rank(a.id) - rank(b.id) ||
+    (a.id.startsWith('ring-') || a.id.startsWith('earrings-')
+      ? codeOrder.compare(a.data.code ?? '', b.data.code ?? '')
+      : 0));
 }
 if (category === 'hair-accessories') {
   products.sort((a, b) => a.data.title.localeCompare(b.data.title, 'fa'));
@@ -25,12 +29,18 @@ if (category === 'skin-care') {
   const adjacentProducts = ['blood-orange-toner', 'bioaqua-micellar'];
   const rank = (id: string) => adjacentProducts.includes(id) ? 0 : 1;
   products.sort((a, b) => rank(a.id) - rank(b.id) || a.data.title.localeCompare(b.data.title, 'fa'));
+  const patchIndex = products.findIndex(product => product.id === 'eye-patches');
+  if (patchIndex !== -1) {
+    const [patch] = products.splice(patchIndex, 1);
+    const maskIndex = products.findIndex(product => product.id === 'sheet-mask');
+    products.splice(maskIndex + 1, 0, patch);
+  }
 }
 if (category === 'girly-stuff') {
   products.sort((a, b) => a.data.title.localeCompare(b.data.title, 'fa'));
 }
 if (category === 'cosmetics') {
-  const firstProducts = ['drohoo-liquid-lipstick', 'drohoo-lip-gloss', 'drohoo-thermal-lip-balm', 'brown-lip-tint'];
+  const firstProducts = ['drohoo-liquid-lipstick', 'drohoo-lip-gloss', 'drohoo-thermal-lip-balm', 'lura-beauty-double-ended-lipstick', 'flormar-lipliner', 'brown-lip-tint'];
   const rank = (id: string) => {
     const index = firstProducts.indexOf(id);
     if (index !== -1) return index;
@@ -39,6 +49,12 @@ if (category === 'cosmetics') {
   };
   const persianOrder = new Intl.Collator('fa', { numeric: true });
   products.sort((a, b) => rank(a.id) - rank(b.id) || persianOrder.compare(a.data.title, b.data.title));
+  const starIndex = products.findIndex(product => product.id === 'star-eyeliner');
+  if (starIndex !== -1) {
+    const [star] = products.splice(starIndex, 1);
+    const heartIndex = products.findIndex(product => product.id === 'heart-eyeliner');
+    products.splice(heartIndex + 1, 0, star);
+  }
 }
 const renderedProducts = await Promise.all(products.map(async product => ({ product, Content: (await render(product)).Content })));
 ---

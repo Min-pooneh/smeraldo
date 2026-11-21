@@ -52,23 +52,17 @@ body{animation:page-fade-in .5s ease-out}
 .gallery-controls[hidden]{display:none}
 .star-bracelet .shop-photo{position:relative;display:block;height:auto;aspect-ratio:1}
 .star-bracelet .shop-photo img{width:100%;height:100%;object-fit:cover;object-position:center}
-@font-face{font-family:Tiam;src:url('../assets/tiam.woff2') format('woff2');font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+FB50-FDFF,U+FE70-FEFF}
-body{font-family:Tiam,'Nunito Sans',sans-serif}
-.shop-brand,.shop-heading h1,.shop-card h2{font-family:Tiam,'Cormorant Garamond',serif}
+@font-face{font-family:Modam;src:url('../assets/modam-no-en-regular.woff2') format('woff2');font-weight:400;font-display:swap}
+body{font-family:Modam,'Nunito Sans',sans-serif}
+.shop-brand,.shop-heading h1,.shop-card h2{font-family:Modam,'Cormorant Garamond',serif}
 .shop-card h2{font-size:28px}
 .product-brand,.product-description,.shop-no-image{font-size:19px}
 .shop-price{font-size:23px}
 @media(max-width:700px){.shop-card h2{font-size:23px}.product-brand,.product-description,.shop-no-image{font-size:17px}.shop-price{font-size:20px}}
 .shop-card-details{overflow-wrap:anywhere}
-.shop-card h2[lang="fa"]{font-size:56px}
-.product-brand[lang="fa"],.product-description[lang="fa"]{font-size:38px}
-.product-brand span[lang="fa"]{font-size:38px}
-.shop-price span[lang="fa"]{font-size:46px}
-.shop-price del[lang="fa"]{font-size:32px}
-@media(max-width:700px){.shop-card h2[lang="fa"]{font-size:46px}.product-brand[lang="fa"],.product-description[lang="fa"],.product-brand span[lang="fa"]{font-size:34px}.shop-price span[lang="fa"]{font-size:40px}}
 .shop-card h2[lang="fa"],.product-brand[lang="fa"],.product-brand span[lang="fa"],.product-description[lang="fa"],.shop-price span[lang="fa"],.shop-price del[lang="fa"]{font-weight:400}
-.shop-card h2{margin-bottom:3px;line-height:1}
-.product-brand{margin:0 0 3px;line-height:1;display:flex;align-items:baseline;justify-content:flex-start;gap:3px}
+.shop-card h2{margin-bottom:calc(3px + 2mm);line-height:1}
+.product-brand{margin:0 0 calc(3px + 2mm);line-height:1;display:flex;align-items:baseline;justify-content:flex-start;gap:3px}
 .brand-colon{font-family:'Nunito Sans',sans-serif;font-size:19px;line-height:1}
 .shop-price{line-height:1;margin:0}
 .shop-price span{line-height:1}

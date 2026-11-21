@@ -19,16 +19,13 @@ body{animation:page-fade-in .5s ease-out}
 .about-bar{flex-wrap:wrap}.home-section-heading h2{white-space:normal;text-align:center}.category-name{overflow-wrap:anywhere}
 .category-titles{display:flex;flex-direction:column;align-items:center;gap:4px}
 .category-fa{font-size:12px;font-weight:400;color:#987c7a;line-height:1.3}
-@font-face{font-family:Tiam;src:url('../assets/tiam.woff2') format('woff2');font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+FB50-FDFF,U+FE70-FEFF}
-body{font-family:Tiam,'Nunito Sans',sans-serif}
-.brand,.hero-copy h1,.home-section-heading h2,.about-bar h2{font-family:Tiam,'Cormorant Garamond',serif}
+@font-face{font-family:Modam;src:url('../assets/modam-no-en-regular.woff2') format('woff2');font-weight:400;font-display:swap}
+body{font-family:Modam,'Nunito Sans',sans-serif}
+.brand,.hero-copy h1,.home-section-heading h2,.about-bar h2{font-family:Modam,'Cormorant Garamond',serif}
 .category-fa{font-size:16px}
 .category-name{font-size:21px}
 .hero-copy p{font-size:16px}
 @media(max-width:700px){.category-name{font-size:18px}.category-fa{font-size:15px}.hero-copy p{font-size:14px}}
-.category-fa{font-size:32px}.about-bar p[lang="fa"]{font-size:42px}
-@media(max-width:1000px){.about-bar p[lang="fa"]{font-size:34px}}
-@media(max-width:700px){.category-fa{font-size:30px}.about-bar p[lang="fa"]{font-size:32px}}
 .category-fa,.about-bar p[lang="fa"]{font-weight:400}
 .category-name{justify-content:center;text-align:center}
 .about-bar{display:flex;align-items:center;flex-wrap:nowrap;gap:26px;padding:12px 30px;border:1px solid #f8d8dc;border-radius:22px;background:#fbeaec;box-shadow:0 2px 3px #ba8b8b55}
@@ -40,7 +37,6 @@ body{font-family:Tiam,'Nunito Sans',sans-serif}
 @media(hover:hover){.about-bar .social a:hover{transform:translateY(-3px);background:#f6c5d0;color:#c62f5e}}
 .about-bar .social svg{width:19px;height:19px}
 @media(max-width:700px){.about-bar{flex-wrap:wrap;gap:14px;padding:16px}.about-bar h2{font-size:20px}.about-bar p[lang="fa"]{order:3;flex-basis:100%;margin:0;padding:12px 0 0;border:0;border-top:1px solid #efb9c6;font-size:22px}.about-bar .social{margin-left:auto;gap:8px}}
-.about-bar p[lang="fa"]{font-size:44px}
 .brand svg{transition:transform .3s ease}
 .category-name svg{transition:transform .3s ease}
 @media(hover:hover){.brand:hover svg{transform:rotate(-8deg)}.home-category:hover .category-name svg{transform:translateY(-3px)}}
