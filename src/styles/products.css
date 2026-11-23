@@ -113,6 +113,8 @@ body{background:radial-gradient(circle at 97% 12%,#fff0e7 0,transparent 25rem),r
 .product-brand{color:#927373}
 .shop-price{color:#b53c60}
 .shop-price del{color:#aa9392}
+.is-unavailable .shop-photo img{filter:grayscale(.55) brightness(.8)}
+.is-unavailable .shop-photo::after{content:'';position:absolute;inset:0;background:rgba(62,43,44,.18);pointer-events:none;z-index:1}
 .product-description{color:#765f60;line-height:1.7}
 .shop-swatches button,.shop-swatches span{border-color:#cba9a5}
 .shop-swatches button[aria-pressed=true]{outline-color:#bd4267}
