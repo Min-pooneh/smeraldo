@@ -1,0 +1,46 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: src/assets
+public_folder: ../../assets
+
+collections:
+  - name: products
+    label: محصولات
+    folder: src/content/products
+    create: true
+    slug: "{{slug}}"
+    extension: mdx
+    format: frontmatter
+    fields:
+      - { label: نام, name: title, widget: string }
+      - { label: کد, name: code, widget: string, required: false }
+      - { label: برند, name: brand, widget: string, required: false }
+      - label: دسته‌بندی
+        name: category
+        widget: select
+        options: [accessories, cosmetics, hair-accessories, skin-care, girly-stuff]
+      - { label: قیمت, name: price, widget: string, required: false }
+      - { label: قیمت قبل از تخفیف, name: originalPrice, widget: string, required: false }
+      - { label: موجود است, name: available, widget: boolean, default: true }
+      - { label: مخفی از سایت, name: draft, widget: boolean, default: false, required: false }
+      - { label: عکس اصلی, name: image, widget: image, required: false }
+      - label: گالری تصاویر
+        name: gallery
+        widget: list
+        required: false
+        fields:
+          - { label: عنوان عکس, name: label, widget: string }
+          - { label: عکس, name: image, widget: image }
+      - label: رنگ‌ها
+        name: colors
+        widget: list
+        required: false
+        fields:
+          - { label: نام رنگ, name: name, widget: string }
+          - { label: کد رنگ, name: hex, widget: color }
+          - { label: موجود است, name: available, widget: boolean, default: true }
+          - { label: عکس محصول, name: image, widget: image, required: false }
+          - { label: عکس روی مدل, name: modelImage, widget: image, required: false }
+      - { label: توضیحات, name: body, widget: markdown, required: false }

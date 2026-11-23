@@ -10,7 +10,6 @@ interface Props { category?: string }
 const { category = 'all' } = Astro.props;
 const currentCategory = (await getCollection('categories')).find(item => item.id === category);
 const products = (await getCollection('products')).filter(product => !product.data.draft && (category === 'all' || product.data.category === category));
-const unavailableProductIds = new Set(['ring-001', 'earrings-003', 'earrings-028', 'earrings-032']);
 if (category === 'accessories') {
   const groups = ['watch', 'bracelet', 'necklace', 'ring', 'earrings'];
   const rank = (id: string) => {
@@ -86,9 +85,10 @@ const renderedProducts = await Promise.all(products.map(async product => ({ prod
       </div>
       <div class="shop-grid">
         {renderedProducts.map(({ product, Content }, index) => {
-          const firstColorWithImage = product.data.colors?.findIndex(color => color.image) ?? -1;
-          const initialColor = product.data.image ? -1 : firstColorWithImage;
-          return <article class:list={['shop-card', { 'is-unavailable': unavailableProductIds.has(product.id), 'drohoo-lipstick': product.id === 'drohoo-liquid-lipstick', 'drohoo-gloss': product.id === 'drohoo-lip-gloss', 'drohoo-balm': product.id === 'drohoo-thermal-lip-balm', 'eyeshadow-palette': product.id === 'eyeshadow-palette', 'doll-product': product.id === 'doll-20cm', 'watch-product': product.id === 'walar-watch', 'star-bracelet': product.id === 'star-bracelet' || product.id === 'leaf-bracelet' || product.id.startsWith('earrings-') || product.id === 'blood-orange-toner' || product.id === 'bioaqua-micellar' || product.id === 'portable-wipes' || product.id === 'brown-lip-tint' || product.id === 'eyeshadow-9' || product.id === 'eyeshadow-35' || product.id === 'face-gems' || product.id === 'sheet-mask' || product.id === 'hot-water-bottle' || product.id.endsWith('-kanzashi') || product.id === 'chili-hair-clip' || product.id.endsWith('-necklace') }]}>
+           const firstColorWithImage = product.data.colors?.findIndex(color => color.image) ?? -1;
+           const initialColor = product.data.image ? -1 : firstColorWithImage;
+          const isUnavailable = !product.data.available || (initialColor !== -1 && product.data.colors?.[initialColor]?.available === false);
+          return <article data-product-available={product.data.available} class:list={['shop-card', { 'is-unavailable': isUnavailable, 'drohoo-lipstick': product.id === 'drohoo-liquid-lipstick', 'drohoo-gloss': product.id === 'drohoo-lip-gloss', 'drohoo-balm': product.id === 'drohoo-thermal-lip-balm', 'eyeshadow-palette': product.id === 'eyeshadow-palette', 'doll-product': product.id === 'doll-20cm', 'watch-product': product.id === 'walar-watch', 'star-bracelet': product.id === 'star-bracelet' || product.id === 'leaf-bracelet' || product.id.startsWith('earrings-') || product.id === 'blood-orange-toner' || product.id === 'bioaqua-micellar' || product.id === 'portable-wipes' || product.id === 'brown-lip-tint' || product.id === 'eyeshadow-9' || product.id === 'eyeshadow-35' || product.id === 'face-gems' || product.id === 'sheet-mask' || product.id === 'hot-water-bottle' || product.id.endsWith('-kanzashi') || product.id === 'chili-hair-clip' || product.id.endsWith('-necklace') }]}>
           <div class:list={['shop-photo', { 'square-product': product.id === 'lechic-brown-eyeliner' || product.id === 'kuromi-hair-ties', 'manicure-photo': product.id === 'manicure-set' }]}>
             {product.data.image && <Image src={product.data.image} alt={product.data.title} loading={index < 2 ? 'eager' : 'lazy'} data-default-image />}
             {product.data.colors?.map((color, colorIndex) => color.image && <Image src={color.image} alt={`${product.data.title} - ${color.name}`} loading={initialColor === colorIndex && index < 2 ? 'eager' : 'lazy'} data-color-image={colorIndex} hidden={initialColor !== colorIndex} />)}
@@ -108,9 +108,9 @@ const renderedProducts = await Promise.all(products.map(async product => ({ prod
             <h2 dir="auto" lang={/[\u0600-\u06ff]/.test(product.data.title) ? 'fa' : 'en'}>{product.data.title}</h2>
             {product.data.brand && <p class="product-brand" dir="rtl"><span lang="fa">برند</span><span class="brand-colon" lang="en">:</span> <bdi>{product.data.brand}</bdi></p>}
             {product.data.code && <p class="product-brand" dir="rtl" lang="fa">کد: {product.data.code}</p>}
-            {product.data.price && <p class="shop-price" dir="auto"><span lang={/[\u0600-\u06ff]/.test(product.data.price) ? 'fa' : 'en'}>{product.data.price.split(/([٬،,])/).map(part => /^[٬،,]$/.test(part) ? <span class="price-separator" lang="en">,</span> : part)}</span>{product.data.originalPrice && <del lang={/[\u0600-\u06ff]/.test(product.data.originalPrice) ? 'fa' : 'en'}>{product.data.originalPrice.split(/([٬،,])/).map(part => /^[٬،,]$/.test(part) ? <span class="price-separator" lang="en">,</span> : part)}</del>}</p>}
+            {product.data.price && <p class="shop-price" dir="auto" data-price data-available-price={product.data.price}><span lang={isUnavailable || /[\u0600-\u06ff]/.test(product.data.price) ? 'fa' : 'en'}>{isUnavailable ? 'ناموجود' : product.data.price.split(/([٬،,])/).map(part => /^[٬،,]$/.test(part) ? <span class="price-separator" lang="en">,</span> : part)}</span>{product.data.originalPrice && <del data-original-price hidden={isUnavailable} lang={/[\u0600-\u06ff]/.test(product.data.originalPrice) ? 'fa' : 'en'}>{product.data.originalPrice.split(/([٬،,])/).map(part => /^[٬،,]$/.test(part) ? <span class="price-separator" lang="en">,</span> : part)}</del>}</p>}
             <div class="product-description" dir="auto" lang="fa"><Content /></div>
-            {product.data.colors && <div class="swatch-row"><div class="shop-swatches" role="group" aria-label={`Colors for ${product.data.title}`}>{product.data.colors.map((color, colorIndex) => color.image ? <button type="button" style={`--swatch: ${color.hex}`} title={color.name} aria-label={color.name} aria-pressed={initialColor === colorIndex} data-select-color={colorIndex}></button> : <span style={`--swatch: ${color.hex}`} title={color.name} aria-label={color.name}></span>)}</div>
+            {product.data.colors && <div class="swatch-row"><div class="shop-swatches" role="group" aria-label={`Colors for ${product.data.title}`}>{product.data.colors.map((color, colorIndex) => color.image ? <button type="button" style={`--swatch: ${color.hex}`} title={color.name} aria-label={color.name} aria-pressed={initialColor === colorIndex} data-select-color={colorIndex} data-available={color.available}></button> : <span style={`--swatch: ${color.hex}`} title={color.name} aria-label={color.name}></span>)}</div>
             {product.id === 'drohoo-liquid-lipstick' && <button type="button" class="swatch-test-button" data-swatch-test aria-pressed="false" aria-label="تست رنگ روی دست" title="تست رنگ روی دست"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 12V5a2 2 0 0 1 4 0v6-1a2 2 0 0 1 4 0v2-1a2 2 0 0 1 4 0v4c0 4-2.5 6-6 6h-2c-2 0-3.5-1-4.5-2.5L4 14a2 2 0 0 1 3-2z"/></svg></button>}</div>}
           </div>
         </article>})}
@@ -121,9 +121,18 @@ const renderedProducts = await Promise.all(products.map(async product => ({ prod
       document.querySelectorAll<HTMLElement>('.shop-card').forEach(card => {
         const buttons = card.querySelectorAll<HTMLButtonElement>('[data-select-color]');
         const photos = card.querySelectorAll<HTMLImageElement>('.shop-photo img');
+        const setAvailability = (available: boolean) => {
+          card.classList.toggle('is-unavailable', !available);
+          const price = card.querySelector<HTMLElement>('[data-price]');
+          if (!price) return;
+          price.querySelector('span')!.textContent = available ? price.dataset.availablePrice! : 'ناموجود';
+          const originalPrice = price.querySelector<HTMLModElement>('[data-original-price]');
+          if (originalPrice) originalPrice.hidden = !available;
+        };
         buttons.forEach(button => button.addEventListener('click', () => {
           card.querySelector<HTMLButtonElement>('[data-swatch-test]')?.setAttribute('aria-pressed', 'false');
           buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+          setAvailability(card.dataset.productAvailable === 'true' && button.dataset.available === 'true');
           photos.forEach(photo => { photo.hidden = photo.dataset.colorImage !== button.dataset.selectColor || photo.hasAttribute('data-model-image'); });
           card.querySelectorAll<HTMLElement>('[data-color-gallery]').forEach(gallery => {
             gallery.hidden = gallery.dataset.colorGallery !== button.dataset.selectColor;
@@ -134,6 +143,7 @@ const renderedProducts = await Promise.all(products.map(async product => ({ prod
           const button = event.currentTarget as HTMLButtonElement;
           button.setAttribute('aria-pressed', 'true');
           buttons.forEach(item => item.setAttribute('aria-pressed', 'false'));
+          setAvailability(card.dataset.productAvailable === 'true');
           photos.forEach(photo => { photo.hidden = !photo.hasAttribute('data-swatch-image'); });
         });
         card.querySelectorAll<HTMLElement>('[data-color-gallery]').forEach(gallery => {

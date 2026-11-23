@@ -10,10 +10,11 @@ const products = defineCollection({
     draft: z.boolean().default(false),
     category: z.string(),
     price: z.string().optional(),
+    available: z.boolean().default(true),
     image: image().optional(),
     gallery: z.array(z.object({ image: image(), label: z.string() })).optional(),
     originalPrice: z.string().optional(),
-    colors: z.array(z.object({ name: z.string(), hex: z.string().regex(/^#[0-9a-fA-F]{6}$/), image: image().optional(), modelImage: image().optional() })).optional(),
+    colors: z.array(z.object({ name: z.string(), hex: z.string().regex(/^#[0-9a-fA-F]{6}$/), available: z.boolean().default(true), image: image().optional(), modelImage: image().optional() })).optional(),
   }),
 });
 const categories = defineCollection({
